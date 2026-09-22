@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #d9e6ff;
+  --color-brand-200: #bcd3ff;
+  --color-brand-300: #8eb5ff;
+  --color-brand-400: #598cff;
+  --color-brand-500: #3364f7;
+  --color-brand-600: #1d44e4;
+  --color-brand-700: #1734b8;
+  --color-brand-800: #182e91;
+  --color-brand-900: #182c73;
+  --color-brand-950: #111c45;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Tailwind v4 does not let @apply reference another custom component class,
+ * so each button variant repeats the base utilities instead of composing .btn.
+ */
+@utility container-page {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  @apply bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-500;
+}
+
+@utility btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  @apply bg-white text-brand-700 ring-1 ring-brand-200 ring-inset hover:bg-brand-50 focus-visible:ring-brand-500;
+}
+
+@utility btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  @apply bg-slate-100 text-slate-700 hover:bg-slate-200 focus-visible:ring-slate-400;
+}
+
+@utility card {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+}
+
+@utility label {
+  @apply mb-1.5 block text-sm font-medium text-slate-700;
+}
+
+@utility input {
+  @apply block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-xs transition placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 disabled:bg-slate-50;
+}
+
+@utility input-error {
+  @apply border-rose-400 focus:border-rose-500 focus:ring-rose-500/20;
+}
+
+@utility help {
+  @apply mt-1.5 text-xs text-slate-500;
+}
+
+@utility error-text {
+  @apply mt-1.5 text-xs font-medium text-rose-600;
+}
+
+@utility badge {
+  @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset;
+}
+
+@utility section-eyebrow {
+  @apply text-xs font-semibold tracking-[0.18em] text-brand-600 uppercase;
+}
