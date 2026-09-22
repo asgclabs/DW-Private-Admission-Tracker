@@ -237,3 +237,4 @@ point `NEXT_PUBLIC_SITE_URL` at your domain, allow Vercel's IPs in Atlas Network
 and register the Razorpay webhook. Run `npm run db:seed` once against the production
 database to create the indexes and the first super-admin.
 # DW-Private-Admission-Tracker
+# DW-Private-Admission-Tracker
