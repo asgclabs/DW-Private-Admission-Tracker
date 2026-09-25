@@ -14,6 +14,8 @@ import {
   type CustomFieldType,
 } from "@/lib/field-catalog";
 import { ListBuilder } from "./list-builder";
+import { ComparisonBuilder } from "./comparison-builder";
+import type { ComparisonRow } from "@/lib/types";
 
 const GROUPS: (typeof FIELD_CATALOG)[CatalogFieldKey]["group"][] = ["student", "address", "cbse"];
 
@@ -43,6 +45,7 @@ export function CourseEditor({ course }: { course?: CourseView }) {
   const [enabled, setEnabled] = useState<string[]>(course?.catalogFields ?? []);
   const [required, setRequired] = useState<string[]>(course?.requiredFields ?? []);
   const [customFields, setCustomFields] = useState<CustomField[]>(course?.customFields ?? []);
+  const [comparison, setComparison] = useState<ComparisonRow[]>(course?.comparison ?? []);
 
   function toggleField(key: string) {
     setEnabled((current) => {
@@ -102,6 +105,8 @@ export function CourseEditor({ course }: { course?: CourseView }) {
       sortOrder: data.get("sortOrder") || 0,
       catalogFields: enabled,
       requiredFields: required,
+      // Rows left without a label are dropped rather than failing the whole save.
+      comparison: comparison.filter((row) => row.label.trim() !== ""),
       customFields: customFields.map((field) => ({
         ...field,
         key: field.key || toFieldKey(field.label),
@@ -212,7 +217,7 @@ export function CourseEditor({ course }: { course?: CourseView }) {
               id="tagline"
               name="tagline"
               defaultValue={course?.tagline}
-              placeholder="Clear your compartment exam in 2026 with full support."
+              placeholder="Clear your compartment exam in 2027 with full support."
               className={`input ${errors.tagline ? "input-error" : ""}`}
             />
             {errors.tagline && <p className="error-text">{errors.tagline}</p>}
@@ -242,7 +247,7 @@ export function CourseEditor({ course }: { course?: CourseView }) {
               id="audience"
               name="audience"
               defaultValue={course?.audience}
-              placeholder="Compartment students appearing in 2026"
+              placeholder="Compartment students appearing in 2027"
               className={`input ${errors.audience ? "input-error" : ""}`}
             />
             {errors.audience && <p className="error-text">{errors.audience}</p>}
@@ -502,6 +507,21 @@ export function CourseEditor({ course }: { course?: CourseView }) {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Comparison table */}
+      <section className="card p-6">
+        <h2 className="text-sm font-bold text-slate-900">Comparison table</h2>
+        <p className="mt-1 text-xs text-slate-500">
+          This course&apos;s column in the table on the home page. Type <strong>Yes</strong>, or
+          a note such as <strong>Monthly</strong>, to show a tick; use &mdash; for &ldquo;not
+          included&rdquo;. Tick <strong>Text</strong> for free text without a tick, like
+          &ldquo;Who it is for&rdquo;. The fee row is added automatically. Use the same row label
+          on every course so they line up.
+        </p>
+        <div className="mt-5">
+          <ComparisonBuilder rows={comparison} onChange={setComparison} />
         </div>
       </section>
 

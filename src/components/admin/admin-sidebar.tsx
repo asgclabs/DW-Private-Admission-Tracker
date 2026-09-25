@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AcademicCapIcon, BellIcon, DashboardIcon, DocumentIcon, UsersIcon } from "./icons";
+import { AcademicCapIcon, BellIcon, DashboardIcon, DocumentIcon, UsersIcon } from "@/components/icons";
 
 export function AdminSidebar({ role }: { role: "SUPER_ADMIN" | "ADMIN" }) {
   const pathname = usePathname();

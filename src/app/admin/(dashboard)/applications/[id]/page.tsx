@@ -91,7 +91,7 @@ export default async function ApplicationDetail({
                   </a>
                 }
               />
-              <Row label="Alternate mobile" value={application.altPhone} />
+              <Row label="WhatsApp number" value={application.altPhone} />
               <Row
                 label="Email"
                 value={
@@ -123,6 +123,7 @@ export default async function ApplicationDetail({
               <Row label="Year of passing / last attempt" value={application.passingYear} />
               <Row label="Exam year" value={application.examYear} />
               <Row label="Category" value={application.studentCategory} />
+              <Row label="Class" value={application.studentClass} />
               <Row label="Subject combination" value={application.subjectCombination} />
               <Row
                 label="Subjects"

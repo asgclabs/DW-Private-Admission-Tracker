@@ -22,6 +22,7 @@ export type CatalogFieldKey =
   | "passingYear"
   | "examYear"
   | "studentCategory"
+  | "studentClass"
   | "subjectCombination"
   | "subjects"
   | "improvementSubjects"
@@ -53,7 +54,12 @@ export const SUBJECT_COMBINATIONS = [
 export const STUDENT_CATEGORIES = [
   { value: "COMPARTMENT", label: "Compartment" },
   { value: "IMPROVEMENT", label: "Improvement" },
-  { value: "ESSENTIAL_REPEAT", label: "Essential Repeat (ER)" },
+  { value: "ESSENTIAL_REPEAT", label: "Failure / Essential Repeat (ER)" },
+] as const;
+
+export const STUDENT_CLASSES = [
+  { value: "Class 12th", label: "Class 12th" },
+  { value: "Class 10th", label: "Class 10th" },
 ] as const;
 
 export const GENDERS = [
@@ -165,7 +171,7 @@ export const FIELD_CATALOG: Record<CatalogFieldKey, CatalogField> = {
     kind: "text",
     inputMode: "numeric",
     maxLength: 4,
-    placeholder: "e.g. 2026",
+    placeholder: "e.g. 2027",
   },
   studentCategory: {
     key: "studentCategory",
@@ -173,6 +179,13 @@ export const FIELD_CATALOG: Record<CatalogFieldKey, CatalogField> = {
     group: "cbse",
     kind: "select",
     options: STUDENT_CATEGORIES,
+  },
+  studentClass: {
+    key: "studentClass",
+    label: "Class",
+    group: "cbse",
+    kind: "select",
+    options: STUDENT_CLASSES,
   },
   subjectCombination: {
     key: "subjectCombination",

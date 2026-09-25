@@ -61,9 +61,14 @@ function catalogRule(key: CatalogFieldKey, required: boolean): z.ZodTypeAny {
 
     case "select": {
       const values = (field.options ?? []).map((o) => o.value);
-      const rule = z.string().trim().refine((v) => values.includes(v), {
-        message: `Select a valid option`,
-      });
+      // required_error covers a field missing from the payload altogether; an
+      // empty choice from the form itself is caught by the refine below.
+      const rule = z
+        .string({ required_error: `Select your ${field.label.toLowerCase()}` })
+        .trim()
+        .refine((v) => values.includes(v), {
+          message: `Select a valid option`,
+        });
       return required
         ? rule
         : z
@@ -242,6 +247,12 @@ const customFieldSchema = z.object({
   help: z.string().trim().max(240).optional(),
 });
 
+const comparisonRowSchema = z.object({
+  label: z.string().trim().min(1, "Every comparison row needs a label").max(120),
+  value: z.string().trim().max(120).default(""),
+  plain: z.boolean().default(false),
+});
+
 export const courseSchema = z.object({
   slug: z
     .string()
@@ -274,6 +285,7 @@ export const courseSchema = z.object({
   catalogFields: z.array(z.string().trim()).max(40).default([]),
   requiredFields: z.array(z.string().trim()).max(40).default([]),
   customFields: z.array(customFieldSchema).max(20).default([]),
+  comparison: z.array(comparisonRowSchema).max(40).default([]),
 });
 
 export const adminUserSchema = z.object({

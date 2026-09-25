@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { CopyButton } from "@/components/reference-actions";
 import { PAYMENT_TONE, STATUS_FLOW, STATUS_TONE, statusLabel, type StatusKey } from "@/lib/status";
 
 type TrackedApplication = {
@@ -35,6 +36,12 @@ export function TrackClient({ initialRef }: { initialRef?: string }) {
   const [error, setError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [result, setResult] = useState<TrackedApplication | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  // On a phone the result renders below the fold — bring it into view.
+  useEffect(() => {
+    if (result) resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [result]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -94,7 +101,9 @@ export function TrackClient({ initialRef }: { initialRef?: string }) {
               id="referenceNo"
               name="referenceNo"
               defaultValue={initialRef}
-              placeholder="DWC-26-XXXXXX"
+              placeholder="e.g. DWFI-26-4F8K2Q"
+              autoComplete="off"
+              spellCheck={false}
               className={`input uppercase ${errors.referenceNo ? "input-error" : ""}`}
             />
             {errors.referenceNo && <p className="error-text">{errors.referenceNo}</p>}
@@ -110,6 +119,10 @@ export function TrackClient({ initialRef }: { initialRef?: string }) {
               inputMode="tel"
               maxLength={10}
               placeholder="10-digit mobile number"
+              onInput={(event) => {
+                const el = event.currentTarget;
+                if (/\D/.test(el.value)) el.value = el.value.replace(/\D/g, "");
+              }}
               className={`input ${errors.phone ? "input-error" : ""}`}
             />
             {errors.phone && <p className="error-text">{errors.phone}</p>}
@@ -131,16 +144,19 @@ export function TrackClient({ initialRef }: { initialRef?: string }) {
       </form>
 
       {result && (
-        <div className="mx-auto mt-10 max-w-3xl space-y-6">
+        <div ref={resultRef} className="mx-auto mt-10 max-w-3xl scroll-mt-24 space-y-6">
           <div className="card p-6 sm:p-8">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
                   Reference number
                 </p>
-                <p className="mt-1 text-xl font-extrabold tracking-tight text-slate-900">
-                  {result.referenceNo}
-                </p>
+                <div className="mt-1 flex flex-wrap items-center gap-3">
+                  <p className="text-xl font-extrabold tracking-tight text-slate-900">
+                    {result.referenceNo}
+                  </p>
+                  <CopyButton value={result.referenceNo} />
+                </div>
                 <p className="mt-1 text-sm text-slate-600">{result.fullName}</p>
               </div>
               <div className="flex flex-col items-end gap-2">

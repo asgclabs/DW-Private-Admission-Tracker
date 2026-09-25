@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { applications } from "@/lib/mongodb";
 import { SITE } from "@/lib/site";
+import { ReferenceActions } from "@/components/reference-actions";
 
 export const metadata: Metadata = {
   title: "Application Confirmed",
@@ -68,6 +69,11 @@ export default async function SuccessPage({
           <p className="mt-3 font-mono text-2xl font-extrabold tracking-wider text-brand-700 sm:text-3xl">
             {application.referenceNo}
           </p>
+          <ReferenceActions
+            referenceNo={application.referenceNo}
+            courseName={application.courseName}
+            trackUrl={`${SITE.url}/track?ref=${encodeURIComponent(application.referenceNo)}`}
+          />
 
           <dl className="mt-8 grid gap-5 border-t border-slate-100 pt-6 text-left sm:grid-cols-2">
             <div>

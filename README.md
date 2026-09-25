@@ -60,6 +60,22 @@ Safe to re-run: it never resets an existing password and never overwrites a cour
 have edited. After the first run, manage admins at `/admin/users` — `ADMIN_EMAIL` and
 `ADMIN_PASSWORD` are only a bootstrap.
 
+### Session 2027 content update
+
+`npm run db:seed` never overwrites a course that already exists. To bring the three starter
+courses in an existing database up to the Session 2027 copy and the details on their Razorpay
+payment pages (2026 → 2027, descriptions, eligibility, highlights, the 13-item Focus offer list,
+the comparison table, Circle's required **Class** field and the Improvement course's
+"Purpose for improvement" box), run:
+
+```bash
+npm run db:update-2027
+```
+
+It only touches those fields on those three slugs, merges the form-field changes into what is
+stored instead of replacing it, is safe to re-run, and reports any other course that still
+mentions 2026. The content lives in `scripts/course-content-2027.ts`.
+
 ### 4. Run
 
 ```bash
@@ -151,11 +167,15 @@ active super-admin cannot be demoted, deactivated or deleted.
 - **Details** — name, short name, URL slug, one-line description, fee, who it is for,
   card colour, display order
 - **Selling points** — what students get, who can enroll, why they pick it (reorderable)
-- **Form fields** — tick which of the 18 catalog fields the form collects (roll number,
+- **Form fields** — tick which of the 19 catalog fields the form collects (roll number,
   subject combination, category, subject picker, address, school details…) and mark which
   of those are compulsory
 - **Extra questions** — anything not in the catalog: short text, long text, dropdown,
   date, number or yes/no checkbox, each optionally required
+- **Comparison table** — this course's column in the table on the home page: one row per
+  line, a value such as `Yes` or `Monthly` (shown with a tick) or `—` (not included), and a
+  "Text" switch for free-text rows like "Who it is for". Rows line up across courses by label,
+  and the fee row is added automatically
 - **Publishing** — "Live on the website" and "Most popular"
 
 Turning a course **off** removes it from the home page, 404s its apply page, and rejects

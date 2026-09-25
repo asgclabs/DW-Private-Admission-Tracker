@@ -45,6 +45,18 @@ export type AdminUserDoc = {
 };
 
 /**
+ * One row of the home-page comparison table for a course. `value` is shown
+ * as-is with a tick ("Yes", "Monthly", "Group Notes"); "—" or empty means the
+ * course does not include it. `plain` rows (e.g. "Who it is for") are free text
+ * and get no tick.
+ */
+export type ComparisonRow = {
+  label: string;
+  value: string;
+  plain?: boolean;
+};
+
+/**
  * A course/program a super-admin creates from the dashboard. Everything the
  * public site shows, and which fields its form collects, lives in this document.
  */
@@ -71,6 +83,8 @@ export type CourseDoc = {
   /** Subset of catalogFields the student must fill in. */
   requiredFields: string[];
   customFields: CustomField[];
+  /** Ordered rows for the home-page comparison table. Missing on older documents. */
+  comparison: ComparisonRow[];
   createdAt: Date;
   updatedAt: Date;
 };
@@ -119,6 +133,8 @@ export type ApplicationDoc = {
   passingYear: string | null;
   examYear: string | null;
   studentCategory: StudentCategory | null;
+  /** "Class 12th" or "Class 10th". Absent on applications taken before the field existed. */
+  studentClass?: string | null;
   subjectCombination: SubjectCombination | null;
   subjects: string[];
   failedSubjects: string[];

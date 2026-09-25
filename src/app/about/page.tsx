@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const STATS = [
   { value: "3", label: "Support programs" },
-  { value: "2026", label: "Current session" },
+  { value: "2027", label: "Current session" },
   { value: "100%", label: "Form filling assistance" },
 ];
 

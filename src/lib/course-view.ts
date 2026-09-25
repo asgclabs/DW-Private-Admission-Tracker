@@ -7,7 +7,7 @@
  * bundle.
  */
 import { parseCustomFields, type CustomField } from "./field-catalog";
-import type { CourseDoc } from "./types";
+import type { ComparisonRow, CourseDoc } from "./types";
 
 /** A course shaped for rendering — no ObjectId or Date, safe for client components. */
 export type CourseView = {
@@ -29,6 +29,7 @@ export type CourseView = {
   catalogFields: string[];
   requiredFields: string[];
   customFields: CustomField[];
+  comparison: ComparisonRow[];
 };
 
 export function toCourseView(course: CourseDoc): CourseView {
@@ -51,6 +52,11 @@ export function toCourseView(course: CourseDoc): CourseView {
     catalogFields: course.catalogFields ?? [],
     requiredFields: course.requiredFields ?? [],
     customFields: parseCustomFields(course.customFields),
+    comparison: (course.comparison ?? []).map((row) => ({
+      label: row.label,
+      value: row.value ?? "",
+      plain: Boolean(row.plain),
+    })),
   };
 }
 
