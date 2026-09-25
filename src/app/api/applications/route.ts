@@ -105,6 +105,7 @@ export async function POST(request: Request) {
     passingYear: pick("passingYear"),
     examYear: pick("examYear"),
     studentCategory: pick("studentCategory") as StudentCategory | null,
+    studentClass: pick("studentClass"),
     subjectCombination: pick("subjectCombination") as SubjectCombination | null,
     subjects: pickList("subjects"),
     improvementSubjects: pickList("improvementSubjects"),

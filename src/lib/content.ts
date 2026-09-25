@@ -3,11 +3,11 @@ export const CATEGORIES = [
   {
     key: "compartment",
     title: "Compartment",
-    subtitle: "Failed in one subject",
+    subtitle: "Failed in one subject (up to two in Class 10)",
     body:
-      "CBSE places you in the compartment category when you clear every subject except one. You appear only for that subject in the compartment exam and your original pass year is retained.",
+      "CBSE places you in the compartment category when you fail only one subject (up to two in Class 10). You appear only in those subjects in the compartment exam and your original pass year is retained.",
     points: [
-      "Only the failed subject is re-attempted",
+      "Only the failed subject(s) are re-attempted",
       "Form is filled through the school or as a private candidate",
       "Result is declared as PASS once you clear it",
     ],
@@ -29,9 +29,9 @@ export const CATEGORIES = [
   {
     key: "essential-repeat",
     title: "Essential Repeat (ER)",
-    subtitle: "Failed in two or more subjects",
+    subtitle: "Failed in two or more subjects (three or more in Class 10)",
     body:
-      "If you could not clear two or more subjects, CBSE marks the result as Essential Repeat. The whole year is repeated and all subjects are attempted again in the next board exam.",
+      "If you could not clear two or more subjects (three or more in Class 10), CBSE marks the result as Essential Repeat. The whole year is repeated and all subjects are attempted again in the next board exam.",
     points: [
       "All subjects are attempted again",
       "You appear in the next annual board examination",

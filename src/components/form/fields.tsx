@@ -226,16 +226,23 @@ export function ConsentField({ error }: { error?: string }) {
 }
 
 export function FormSection({
+  id,
   title,
   description,
   children,
 }: {
+  /** Anchor for the progress bar's jump links (rendered as section-<id>). */
+  id?: string;
   title: string;
   description?: string;
   children: ReactNode;
 }) {
   return (
-    <section className="border-t border-slate-100 pt-8 first:border-0 first:pt-0">
+    <section
+      id={id ? `section-${id}` : undefined}
+      // Clears the sticky site header plus the form's sticky progress bar.
+      className="scroll-mt-48 border-t border-slate-100 pt-8 first:border-0 first:pt-0"
+    >
       <h2 className="text-base font-bold text-slate-900">{title}</h2>
       {description && <p className="mt-1 text-sm text-slate-500">{description}</p>}
       <div className="mt-6 grid gap-5 sm:grid-cols-2">{children}</div>

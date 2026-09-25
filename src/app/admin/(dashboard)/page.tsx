@@ -16,7 +16,7 @@ import {
   TrendDownIcon,
   TrendUpIcon,
   XCircleIcon,
-} from "@/components/admin/icons";
+} from "@/components/icons";
 
 export const dynamic = "force-dynamic";
 
