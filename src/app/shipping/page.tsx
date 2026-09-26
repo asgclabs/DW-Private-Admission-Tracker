@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Shipping and Delivery",
-  description: "How Doon Winner Academy delivers program access and study material.",
+  description: "How Doon Winner delivers program access and study material.",
 };
 
 export default function Page() {

@@ -1,4 +1,5 @@
 import { Faq } from "@/components/faq";
+import { WhatsAppIcon } from "@/components/icons";
 import { FAQS } from "@/lib/content";
 import { SITE } from "@/lib/site";
 import { SectionHeading } from "./section-heading";
@@ -25,6 +26,7 @@ export function FaqSection() {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
               >
+                <WhatsAppIcon className="h-4 w-4" />
                 Chat on WhatsApp
               </a>
               <a href={SITE.phoneHref} className="btn-secondary w-full py-2.5">

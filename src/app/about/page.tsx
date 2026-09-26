@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Doon Winner Academy helps CBSE private candidates through compartment, improvement and essential repeat examinations.",
+    "Doon Winner helps CBSE private candidates through compartment, improvement and essential repeat examinations.",
 };
 
 const STATS = [

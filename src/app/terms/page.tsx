@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  description: "Terms governing the use of Doon Winner Academy programs and this website.",
+  description: "Terms governing the use of Doon Winner programs and this website.",
 };
 
 export default function Page() {

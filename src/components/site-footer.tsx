@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { WhatsAppIcon } from "@/components/icons";
 import { LEGAL_LINKS, NAV_LINKS, SITE } from "@/lib/site";
 
 export function SiteFooter() {
@@ -70,7 +71,8 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-brand-600">
+              <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-brand-600">
+                <WhatsAppIcon className="h-4 w-4 text-emerald-600" />
                 Chat on WhatsApp
               </a>
             </li>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
 export function FinalCta({ lowestFee }: { lowestFee: number | null }) {
@@ -36,6 +37,7 @@ export function FinalCta({ lowestFee }: { lowestFee: number | null }) {
             rel="noopener noreferrer"
             className="btn px-7 py-3.5 text-base text-white ring-1 ring-white/30 ring-inset hover:bg-white/10 focus-visible:ring-white"
           >
+            <WhatsAppIcon className="h-5 w-5 text-emerald-400" />
             Talk to us on WhatsApp
           </a>
         </div>

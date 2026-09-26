@@ -1,13 +1,13 @@
 export const SITE = {
-  name: "Doon Winner Academy",
+  name: "Doon Winner",
   title: "CBSE Private Students Guide for Compartment, Improvement & Failure",
   shortTitle: "CBSE Private Students Guide",
   description:
     "Complete guidance and form filling support for CBSE private students appearing in Compartment, Improvement and Essential Repeat exams. Choose Focus 4.0 or Circle 4.0 and track your application.",
   email: "support@doonwinner.in",
-  phone: "+91 88740 24253",
-  phoneHref: "tel:+918874024253",
-  whatsapp: "https://wa.me/918874024253",
+  phone: "+91 88740 42453",
+  phoneHref: "tel:+918874042453",
+  whatsapp: "https://wa.me/918874042453",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
 } as const;
 

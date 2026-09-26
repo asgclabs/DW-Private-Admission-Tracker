@@ -1,4 +1,4 @@
-# CBSE Private Students Guide — Doon Winner Academy
+# CBSE Private Students Guide — Doon Winner
 
 A Next.js application for CBSE private candidates (Compartment, Improvement and
 Essential Repeat), modelled on the existing NIOS admission tracker at
