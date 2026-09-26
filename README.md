@@ -44,7 +44,7 @@ cp .env.example .env
 | `RAZORPAY_WEBHOOK_SECRET` | Razorpay Dashboard → Settings → Webhooks |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Used **once** to create the first super-admin |
 | `AUTH_SECRET` | Generate with `openssl rand -base64 32` |
-| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` locally, your domain in production |
+| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` locally, `https://private.doonwinner.in` in production (production falls back to this domain if unset) |
 
 > **A replica set is required.** The app writes an application and its first status
 > event together. MongoDB Atlas is a replica set out of the box, so nothing to do
@@ -253,7 +253,7 @@ deliberately separate. Client components import from `course-view`; importing th
 ## Deployment
 
 Works on Vercel as-is. Set every variable from `.env.example` in the project settings,
-point `NEXT_PUBLIC_SITE_URL` at your domain, allow Vercel's IPs in Atlas Network Access,
+point `NEXT_PUBLIC_SITE_URL` at `https://private.doonwinner.in`, allow Vercel's IPs in Atlas Network Access,
 and register the Razorpay webhook. Run `npm run db:seed` once against the production
 database to create the indexes and the first super-admin.
 # DW-Private-Admission-Tracker
