@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Cancellation and Refund Policy",
-  description: "Cancellation and refund terms for Doon Winner Academy programs.",
+  description: "Cancellation and refund terms for Doon Winner programs.",
 };
 
 export default function Page() {

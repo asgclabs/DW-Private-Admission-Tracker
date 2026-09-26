@@ -1,29 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MailIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Reach Doon Winner Academy for help with CBSE compartment, improvement and essential repeat applications.",
+    "Reach Doon Winner for help with CBSE compartment, improvement and essential repeat applications.",
 };
 
 const CHANNELS = [
   {
     label: "Call us",
+    icon: PhoneIcon,
+    tone: "bg-brand-50 text-brand-600",
     value: SITE.phone,
     href: SITE.phoneHref,
     note: "Monday to Saturday, 10 AM to 7 PM",
   },
   {
     label: "Email us",
+    icon: MailIcon,
+    tone: "bg-sky-50 text-sky-600",
     value: SITE.email,
     href: `mailto:${SITE.email}`,
     note: "We reply within one working day",
   },
   {
     label: "WhatsApp",
-    value: "Message us",
+    icon: WhatsAppIcon,
+    tone: "bg-emerald-50 text-emerald-600",
+    value: SITE.phone,
     href: SITE.whatsapp,
     note: "Fastest way to reach the team",
   },
@@ -52,6 +59,9 @@ export default function Page() {
             rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
             className="card p-6 text-center transition hover:border-brand-300 hover:shadow-md"
           >
+            <span className={`mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl ${channel.tone}`}>
+              <channel.icon className="h-5 w-5" />
+            </span>
             <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
               {channel.label}
             </p>

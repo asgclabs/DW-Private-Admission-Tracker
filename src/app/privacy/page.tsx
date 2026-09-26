@@ -4,7 +4,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Doon Winner Academy collects, uses and protects student information.",
+  description: "How Doon Winner collects, uses and protects student information.",
 };
 
 export default function Page() {

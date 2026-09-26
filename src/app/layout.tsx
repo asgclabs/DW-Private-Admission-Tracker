@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "CBSE improvement exam",
     "CBSE essential repeat",
     "CBSE private candidate form filling",
-    "Doon Winner Academy",
+    "Doon Winner",
   ],
   openGraph: {
     title: SITE.title,

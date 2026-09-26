@@ -93,7 +93,7 @@ export function FormShell({
           </div>
 
           <p className="px-2 text-xs leading-relaxed text-slate-500">
-            Payments are processed securely by Razorpay. Doon Winner Academy is an independent
+            Payments are processed securely by Razorpay. Doon Winner is an independent
             guidance service and is not affiliated with CBSE.
           </p>
         </aside>

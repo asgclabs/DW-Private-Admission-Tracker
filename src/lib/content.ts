@@ -101,6 +101,6 @@ export const FAQS = [
   },
   {
     q: "Are you affiliated with CBSE?",
-    a: "No. Doon Winner Academy is an independent guidance service. We help you with the application process, preparation and updates. All official decisions, dates and results come from CBSE.",
+    a: "No. Doon Winner is an independent guidance service. We help you with the application process, preparation and updates. All official decisions, dates and results come from CBSE.",
   },
 ];
