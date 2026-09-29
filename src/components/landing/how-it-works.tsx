@@ -10,7 +10,7 @@ export function HowItWorks() {
           <div className="lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="How it works"
-              title="From application to admit card in six steps"
+              title="From application to admit card in seven steps"
               align="left"
             >
               You spend about three minutes on the form. We handle the rest and keep you posted

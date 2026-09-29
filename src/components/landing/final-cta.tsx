@@ -16,7 +16,7 @@ export function FinalCta({ lowestFee }: { lowestFee: number | null }) {
           Session 2027 is open
         </p>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl leading-[1.1] font-extrabold tracking-tight text-white sm:text-5xl">
-          Your next attempt starts with the right form.
+          Start your next attempt with the right guidance.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-brand-100">
           Find your category in 30 seconds, pick a program

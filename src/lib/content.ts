@@ -65,10 +65,15 @@ export const PROCESS_STEPS = [
   {
     step: "05",
     title: "We fill your CBSE form",
-    body: "Our team completes the private candidate form for your category and confirms the submission with you.",
+    body: "Our team completes the private candidate form for your category and checks every detail with you.",
   },
   {
     step: "06",
+    title: "Application confirmation",
+    body: "Once your form is submitted, we send you the confirmation and update your tracker, so you know your application is in.",
+  },
+  {
+    step: "07",
     title: "Track till admit card",
     body: "Follow the status on the tracking page right up to the admit card and exam day guidance.",
   },
