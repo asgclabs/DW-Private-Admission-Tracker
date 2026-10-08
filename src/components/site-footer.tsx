@@ -92,6 +92,19 @@ export function SiteFooter() {
             Not affiliated with CBSE. We provide guidance and form filling assistance only.
           </p>
         </div>
+        <div className="container-page">
+          <p className="border-t border-slate-200/70 py-4 text-center text-xs text-slate-500">
+            Developed and Maintained by{" "}
+            <a
+              href="https://asgclabs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-slate-700 hover:text-brand-600"
+            >
+              ASGC Labs
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
