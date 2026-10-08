@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Price, SavingBadge } from "@/components/price";
 import { getLiveCourseBySlug, getLiveCourses } from "@/lib/courses";
 import { SITE } from "@/lib/site";
 
@@ -51,9 +52,8 @@ export default async function ProgramPage({
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <span className="text-3xl font-extrabold tracking-tight text-slate-900">
-              &#8377;{course.fee.toLocaleString("en-IN")}
-            </span>
+            <Price fee={course.fee} originalFee={course.originalFee} size="lg" />
+            <SavingBadge fee={course.fee} originalFee={course.originalFee} />
             <Link href={`/apply/${course.slug}`} className="btn-primary">
               Apply now
             </Link>

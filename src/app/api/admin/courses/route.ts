@@ -37,6 +37,7 @@ export async function POST(request: Request) {
   const doc: CourseDoc = {
     ...parsed.data,
     paymentPageUrl: parsed.data.paymentPageUrl ?? null,
+    originalFee: parsed.data.originalFee ?? null,
     createdAt: now,
     updatedAt: now,
   };

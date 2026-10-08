@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { Price } from "@/components/price";
 
 export type FinderCourse = {
   slug: string;
   shortName: string;
   fee: number;
+  originalFee: number | null;
   tagline: string;
 };
 
@@ -279,9 +281,7 @@ function FinderResult({
               </p>
               <p className="mt-1 max-w-md text-sm text-slate-600">{primaryCourse.tagline}</p>
             </div>
-            <p className="text-2xl font-extrabold tracking-tight text-slate-900">
-              &#8377;{primaryCourse.fee.toLocaleString("en-IN")}
-            </p>
+            <Price fee={primaryCourse.fee} originalFee={primaryCourse.originalFee} size="md" />
           </div>
           <div className="mt-5 flex flex-col gap-2 sm:flex-row">
             <Link href={`/apply/${primaryCourse.slug}?${prefill}`} className="btn-primary">

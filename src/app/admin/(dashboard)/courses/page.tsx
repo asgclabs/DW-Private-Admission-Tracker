@@ -58,6 +58,7 @@ export default async function CoursesPage() {
                 shortName: course.shortName,
                 tagline: course.tagline,
                 fee: course.fee,
+                originalFee: course.originalFee ?? null,
                 isActive: course.isActive,
                 isFeatured: course.isFeatured,
                 sortOrder: course.sortOrder,

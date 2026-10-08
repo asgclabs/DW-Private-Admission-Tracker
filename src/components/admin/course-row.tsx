@@ -10,6 +10,7 @@ type Row = {
   shortName: string;
   tagline: string;
   fee: number;
+  originalFee: number | null;
   isActive: boolean;
   isFeatured: boolean;
   sortOrder: number;
@@ -86,6 +87,11 @@ export function CourseRow({ course }: { course: Row }) {
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-500">
             <span className="font-semibold text-slate-700">
               &#8377;{course.fee.toLocaleString("en-IN")}
+              {course.originalFee !== null && course.originalFee > course.fee && (
+                <del className="ml-1.5 font-normal text-slate-400">
+                  &#8377;{course.originalFee.toLocaleString("en-IN")}
+                </del>
+              )}
             </span>
             <span>/apply/{course.slug}</span>
             <span>{course.fieldCount} extra fields</span>

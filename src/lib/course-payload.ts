@@ -33,6 +33,11 @@ export function parseCoursePayload(
     (key) => isCatalogFieldKey(key) && catalogFields.includes(key),
   );
 
+  // A "was" price at or below the fee would show a fake or negative discount.
+  if (data.originalFee !== undefined && data.originalFee <= data.fee) {
+    errors.originalFee = "Original price must be higher than the fee, or left empty.";
+  }
+
   const seen = new Set<string>();
   for (const field of data.customFields) {
     if (seen.has(field.key)) {

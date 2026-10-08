@@ -17,6 +17,8 @@ export type CourseView = {
   shortName: string;
   tagline: string;
   fee: number;
+  /** Struck-through "was" price; null unless it is higher than the fee. */
+  originalFee: number | null;
   audience: string;
   whoCanEnroll: string[];
   offers: string[];
@@ -40,6 +42,7 @@ export function toCourseView(course: CourseDoc): CourseView {
     shortName: course.shortName,
     tagline: course.tagline,
     fee: course.fee,
+    originalFee: course.originalFee && course.originalFee > course.fee ? course.originalFee : null,
     audience: course.audience,
     whoCanEnroll: course.whoCanEnroll ?? [],
     offers: course.offers ?? [],

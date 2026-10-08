@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Price } from "@/components/price";
 import type { CourseView } from "@/lib/course-view";
 
 const DASH = "—";
@@ -115,8 +116,8 @@ export function ComparisonTable({ courses }: { courses: CourseView[] }) {
             <tr className="group transition-colors hover:bg-slate-50">
               <td className={labelCell}>Fee</td>
               {courses.map((course) => (
-                <td key={course.id} className={`${col(course.isFeatured)} text-base font-bold text-slate-900`}>
-                  &#8377;{course.fee.toLocaleString("en-IN")}
+                <td key={course.id} className={col(course.isFeatured)}>
+                  <Price fee={course.fee} originalFee={course.originalFee} size="sm" />
                 </td>
               ))}
             </tr>

@@ -67,6 +67,8 @@ export async function PATCH(
         $set: {
           ...parsed.data,
           paymentPageUrl: parsed.data.paymentPageUrl ?? null,
+          // Explicit null so clearing the box in the editor removes the old price.
+          originalFee: parsed.data.originalFee ?? null,
           updatedAt: new Date(),
         },
       },

@@ -68,6 +68,8 @@ export type CourseDoc = {
   tagline: string;
   /** Fee in whole rupees. Razorpay is charged this value converted to paise. */
   fee: number;
+  /** Optional higher "was" price, shown struck through next to the fee. Never charged. */
+  originalFee?: number | null;
   audience: string;
   whoCanEnroll: string[];
   offers: string[];

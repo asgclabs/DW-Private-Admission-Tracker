@@ -268,6 +268,14 @@ export const courseSchema = z.object({
     .int("Fee must be a whole number of rupees")
     .min(1, "Fee must be at least ₹1")
     .max(500000, "Fee looks too high"),
+  originalFee: z.preprocess(
+    (v) => (v === "" || v === null ? undefined : v),
+    z.coerce
+      .number({ invalid_type_error: "Enter the original price in rupees" })
+      .int("Original price must be a whole number of rupees")
+      .max(500000, "Original price looks too high")
+      .optional(),
+  ),
   audience: z.string().trim().min(3, "Describe who this is for").max(200),
   whoCanEnroll: z.array(z.string().trim().min(1).max(300)).max(20).default([]),
   offers: z.array(z.string().trim().min(1).max(300)).max(20).default([]),

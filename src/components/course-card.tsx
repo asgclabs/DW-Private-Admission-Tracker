@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SavingBadge, rupees } from "@/components/price";
 import { accentClasses, type CourseView } from "@/lib/course-view";
 
 /** Enough to compare at a glance; the full list lives on the program page. */
@@ -29,9 +30,18 @@ export function CourseCard({ course }: { course: CourseView }) {
         <h3 className="text-xl font-bold text-slate-900">{course.shortName}</h3>
         <p className="mt-2 text-sm leading-relaxed text-slate-600">{course.tagline}</p>
 
-        <div className="mt-6 flex items-end gap-2">
+        {course.originalFee !== null && (
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <del className="text-lg font-semibold text-slate-400 decoration-rose-500/70 decoration-2">
+              <span className="sr-only">Original price </span>
+              {rupees(course.originalFee)}
+            </del>
+            <SavingBadge fee={course.fee} originalFee={course.originalFee} />
+          </div>
+        )}
+        <div className={`${course.originalFee !== null ? "mt-1" : "mt-6"} flex items-end gap-2`}>
           <span className="font-display text-5xl font-extrabold tracking-tight text-slate-900">
-            &#8377;{course.fee.toLocaleString("en-IN")}
+            {rupees(course.fee)}
           </span>
           <span className="pb-1.5 text-sm text-slate-500">one-time fee</span>
         </div>

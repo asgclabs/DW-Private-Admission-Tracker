@@ -36,6 +36,7 @@ const COURSES: SeedCourse[] = [
     shortName: "Focus 4.0 (Improvement)",
     tagline: TAGLINES["focus-improvement"],
     fee: 999,
+    originalFee: 2999,
     audience: "Students who want to improve their CBSE Board exam marks",
     whoCanEnroll: [...WHO_CAN_ENROLL["focus-improvement"]],
     offers: [...FOCUS_OFFERS],
@@ -56,6 +57,7 @@ const COURSES: SeedCourse[] = [
     shortName: "Focus 4.0 (ER / Failure)",
     tagline: TAGLINES["focus-er"],
     fee: 999,
+    originalFee: 2999,
     audience: "Essential Repeat (ER) and failed students targeting the next board exam",
     whoCanEnroll: [
       "Students marked Essential Repeat in the CBSE result",

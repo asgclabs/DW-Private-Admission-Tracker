@@ -94,6 +94,7 @@ export function CourseEditor({ course }: { course?: CourseView }) {
       shortName: data.get("shortName"),
       tagline: data.get("tagline"),
       fee: data.get("fee"),
+      originalFee: data.get("originalFee"),
       audience: data.get("audience"),
       whoCanEnroll,
       offers,
@@ -237,6 +238,26 @@ export function CourseEditor({ course }: { course?: CourseView }) {
             />
             <p className="help">Charged through Razorpay. Students cannot change this.</p>
             {errors.fee && <p className="error-text">{errors.fee}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="originalFee" className="label">
+              Original price in &#8377;
+            </label>
+            <input
+              id="originalFee"
+              name="originalFee"
+              type="number"
+              min={1}
+              defaultValue={course?.originalFee ?? ""}
+              placeholder="e.g. 2999"
+              className={`input ${errors.originalFee ? "input-error" : ""}`}
+            />
+            <p className="help">
+              Optional. Shown crossed out next to the fee. Never charged. Leave empty for no
+              discount.
+            </p>
+            {errors.originalFee && <p className="error-text">{errors.originalFee}</p>}
           </div>
 
           <div>

@@ -29,6 +29,7 @@ export default async function HomePage() {
           slug: course.slug,
           shortName: course.shortName,
           fee: course.fee,
+          originalFee: course.originalFee,
           tagline: course.tagline,
         }))}
       />

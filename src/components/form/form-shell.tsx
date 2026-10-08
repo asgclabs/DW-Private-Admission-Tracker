@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Price, SavingBadge } from "@/components/price";
 import type { CourseView } from "@/lib/course-view";
 import { SITE } from "@/lib/site";
 
@@ -44,10 +45,11 @@ export function FormShell({
             <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
               Program fee
             </p>
-            <p className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
-              &#8377;{course.fee.toLocaleString("en-IN")}
-            </p>
-            <p className="mt-1 text-xs text-slate-500">
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <Price fee={course.fee} originalFee={course.originalFee} size="lg" />
+              <SavingBadge fee={course.fee} originalFee={course.originalFee} />
+            </div>
+            <p className="mt-2 text-xs text-slate-500">
               One time payment &middot; No other charges
             </p>
 
