@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { POLICY_URLS } from "@/lib/site";
 
 type BaseProps = {
   name: string;
@@ -202,15 +203,30 @@ export function ConsentField({ error }: { error?: string }) {
         />
         <span className="text-xs leading-relaxed text-slate-600">
           I confirm that the details above are correct and I accept the{" "}
-          <a href="/terms" target="_blank" className="font-medium text-brand-600 underline">
+          <a
+            href={POLICY_URLS.terms}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-brand-600 underline"
+          >
             Terms of Use
           </a>
           ,{" "}
-          <a href="/privacy" target="_blank" className="font-medium text-brand-600 underline">
+          <a
+            href={POLICY_URLS.privacy}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-brand-600 underline"
+          >
             Privacy Policy
           </a>{" "}
           and the{" "}
-          <a href="/refund" target="_blank" className="font-medium text-brand-600 underline">
+          <a
+            href={POLICY_URLS.refund}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-brand-600 underline"
+          >
             non-refundable fee policy
           </a>
           .

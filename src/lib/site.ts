@@ -33,11 +33,24 @@ export const NAV_LINKS = [
   { href: "/notifications", label: "Notifications" },
 ] as const;
 
+/**
+ * Policy pages live on the main doonwinner.in site. The footer and the
+ * application form's consent checkbox both link here, opening a new tab.
+ */
+export const POLICY_URLS = {
+  about: "https://doonwinner.in/about-us/",
+  contact: "https://doonwinner.in/contact/",
+  terms: "https://doonwinner.in/terms-of-use/",
+  privacy: "https://doonwinner.in/privacy-policy/",
+  shipping: "https://doonwinner.in/shipping-and-delivery/",
+  refund: "https://doonwinner.in/cancellation-and-refund-policy/",
+} as const;
+
 export const LEGAL_LINKS = [
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact Us" },
-  { href: "/terms", label: "Terms of Use" },
-  { href: "/privacy", label: "Privacy Policy" },
-  { href: "/shipping", label: "Shipping and Delivery" },
-  { href: "/refund", label: "Cancellation and Refund Policy" },
+  { href: POLICY_URLS.about, label: "About Us" },
+  { href: POLICY_URLS.contact, label: "Contact Us" },
+  { href: POLICY_URLS.terms, label: "Terms of Use" },
+  { href: POLICY_URLS.privacy, label: "Privacy Policy" },
+  { href: POLICY_URLS.shipping, label: "Shipping and Delivery" },
+  { href: POLICY_URLS.refund, label: "Cancellation and Refund Policy" },
 ] as const;

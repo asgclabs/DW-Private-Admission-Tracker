@@ -47,9 +47,14 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2.5">
             {LEGAL_LINKS.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-sm text-slate-600 hover:text-brand-600">
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-slate-600 hover:text-brand-600"
+                >
                   {link.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
