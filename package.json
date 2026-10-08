@@ -9,7 +9,8 @@
     "db:seed": "tsx scripts/seed.ts",
     "db:indexes": "tsx scripts/seed.ts",
     "mongo:init": "node scripts/init-replica-set.mjs",
-    "db:update-2027": "tsx scripts/update-2027-content.ts"
+    "db:update-2027": "tsx scripts/update-2027-content.ts",
+    "db:simplify-form": "tsx scripts/simplify-form.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

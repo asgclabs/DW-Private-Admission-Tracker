@@ -125,6 +125,8 @@ export type ApplicationDoc = {
   address: string | null;
   city: string | null;
   state: string | null;
+  /** Absent on applications taken before the field existed. */
+  district?: string | null;
   pincode: string | null;
 
   rollNo: string | null;

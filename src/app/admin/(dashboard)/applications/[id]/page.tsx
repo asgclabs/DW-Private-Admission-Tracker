@@ -168,6 +168,7 @@ export default async function ApplicationDetail({
             <dl className="mt-4 divide-y divide-slate-100">
               <Row label="Address" value={application.address} />
               <Row label="City" value={application.city} />
+              <Row label="District" value={application.district} />
               <Row label="State" value={application.state} />
               <Row label="PIN code" value={application.pincode} />
             </dl>

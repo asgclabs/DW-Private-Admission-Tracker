@@ -59,9 +59,8 @@ export function DynamicApplicationForm({
   const fields = useMemo<FieldMeta[]>(() => {
     const list: FieldMeta[] = [
       { name: "fullName", label: "Full name", required: true, kind: "text", section: "contact" },
-      { name: "email", label: "Email address", required: true, kind: "email", section: "contact" },
       { name: "phone", label: "Mobile number", required: true, kind: "phone", section: "contact" },
-      { name: "altPhone", label: "WhatsApp number", required: false, kind: "phone", section: "contact" },
+      { name: "email", label: "Email address", required: true, kind: "email", section: "contact" },
     ];
     for (const section of grouped) {
       for (const field of section.fields) {
@@ -83,10 +82,7 @@ export function DynamicApplicationForm({
         section: "additional",
       });
     }
-    list.push(
-      { name: "remarks", label: "Remarks", required: false, kind: "textarea", section: "remarks" },
-      { name: "consent", label: "Consent", required: true, kind: "consent", section: "confirm" },
-    );
+    list.push({ name: "consent", label: "Consent", required: true, kind: "consent", section: "confirm" });
     return list;
     // The course configuration is fixed for the life of the page.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -224,8 +220,6 @@ export function DynamicApplicationForm({
       fullName: data.get("fullName"),
       email: data.get("email"),
       phone: data.get("phone"),
-      altPhone: data.get("altPhone"),
-      remarks: data.get("remarks"),
       consent: data.get("consent") === "true",
     };
 
@@ -304,6 +298,17 @@ export function DynamicApplicationForm({
           error={errors.fullName}
         />
         <TextField
+          name="phone"
+          label="Mobile number"
+          type="tel"
+          inputMode="tel"
+          maxLength={10}
+          placeholder="10-digit mobile number"
+          help="You'll use this with your reference number to track your application"
+          required
+          error={errors.phone}
+        />
+        <TextField
           name="email"
           label="Email address"
           type="email"
@@ -311,25 +316,6 @@ export function DynamicApplicationForm({
           placeholder="you@example.com"
           required
           error={errors.email}
-        />
-        <TextField
-          name="phone"
-          label="Mobile number"
-          type="tel"
-          inputMode="tel"
-          maxLength={10}
-          placeholder="10-digit mobile number"
-          required
-          error={errors.phone}
-        />
-        <TextField
-          name="altPhone"
-          label="Preferred WhatsApp number"
-          type="tel"
-          inputMode="tel"
-          maxLength={10}
-          placeholder="Optional"
-          error={errors.altPhone}
         />
       </FormSection>
 
@@ -420,21 +406,6 @@ export function DynamicApplicationForm({
           })}
         </FormSection>
       )}
-
-      <FormSection
-        id="remarks"
-        title="Anything else?"
-        description="Optional, but it helps us prepare."
-      >
-        <div className="sm:col-span-2">
-          <TextareaField
-            name="remarks"
-            label="Anything we should know?"
-            placeholder="Previous attempts, marks, special requests"
-            error={errors.remarks}
-          />
-        </div>
-      </FormSection>
 
       <div id="section-confirm" className="scroll-mt-48 border-t border-slate-100 pt-8">
         <ConsentField error={errors.consent} />

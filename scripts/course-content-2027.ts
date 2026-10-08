@@ -1,12 +1,11 @@
 /**
  * Session 2027 course copy. Offers and the comparison table come from
  * "CBSE Track Application (Need Changes).pdf"; descriptions, eligibility, the
- * "why choose us" points and the form fields come from the three Razorpay
- * payment pages, with 2026 changed to 2027 as the PDF requires.
+ * "why choose us" points come from the three Razorpay payment pages, with 2026
+ * changed to 2027 as the PDF requires.
  * Shared by the seed (fresh databases) and update-2027-content (databases that
  * already hold the three starter courses), so both always agree.
  */
-import type { CustomField } from "../src/lib/field-catalog";
 import type { ComparisonRow } from "../src/lib/types";
 
 /** "What We Offer in Focus Batch" — applies to both Focus 4.0 courses. */
@@ -75,16 +74,12 @@ export const HIGHLIGHTS = {
   ],
 } as const;
 
-/** The Improvement payment page's extra "Purpose for Improvement" box (optional there). */
-export const IMPROVEMENT_CUSTOM_FIELDS: CustomField[] = [
-  {
-    key: "purpose_for_improvement",
-    label: "Purpose for improvement",
-    type: "textarea",
-    required: false,
-    options: [],
-  },
-];
+/**
+ * What every program's application form asks for, on top of the fixed name,
+ * mobile number and email. Kept deliberately short — the team collects the
+ * CBSE details itself when filling the form. All of them are required.
+ */
+export const APPLICATION_FORM_FIELDS = ["fatherName", "motherName", "state", "district"];
 
 const DASH = "—";
 

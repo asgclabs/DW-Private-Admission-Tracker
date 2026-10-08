@@ -2,12 +2,11 @@
  * Brings the three starter courses that already exist in the database up to
  * the Session 2027 copy and the details on their Razorpay payment pages:
  * descriptions (2026 -> 2027), eligibility, highlights, the 13-item Focus offer
- * list, the comparison table, Circle's required Class field and the
- * Improvement course's "Purpose for improvement" box.
+ * list and the comparison table.
  *
  * Only touches those specific fields on those three slugs — fees, colours,
- * publish state and every other course are left alone. The form-field changes
- * are merged into what is stored, never replacing it. Safe to re-run.
+ * publish state and every other course are left alone.
+ * Safe to re-run.
  *
  *   npm run db:update-2027
  */
@@ -17,7 +16,6 @@ import {
   COMPARISON,
   FOCUS_OFFERS,
   HIGHLIGHTS,
-  IMPROVEMENT_CUSTOM_FIELDS,
   TAGLINES,
   WHO_CAN_ENROLL,
 } from "./course-content-2027";
@@ -71,34 +69,7 @@ async function main() {
     }
   }
 
-  // --- Form fields ---------------------------------------------------------
-  // Circle's payment page requires Class (12th / 10th). Insert it straight
-  // after Category so the form reads the same as the payment page, and mark it
-  // required — without disturbing any other field the super-admin has set.
-  const circle = await courses.findOne({ slug: "circle" });
-  if (circle) {
-    const catalogFields: string[] = [...(circle.catalogFields ?? [])];
-    if (!catalogFields.includes("studentClass")) {
-      const at = catalogFields.indexOf("studentCategory");
-      catalogFields.splice(at === -1 ? 0 : at + 1, 0, "studentClass");
-    }
-    const requiredFields: string[] = [...(circle.requiredFields ?? [])];
-    if (!requiredFields.includes("studentClass")) requiredFields.push("studentClass");
-
-    await courses.updateOne({ slug: "circle" }, { $set: { catalogFields, requiredFields } });
-    console.log("circle: Class field enabled and required");
-  }
-
-  // The Improvement page has an extra "Purpose for Improvement" box.
-  const improvement = await courses.findOne({ slug: "focus-improvement" });
-  if (improvement) {
-    const customFields: { key: string }[] = [...(improvement.customFields ?? [])];
-    for (const field of IMPROVEMENT_CUSTOM_FIELDS) {
-      if (!customFields.some((existing) => existing.key === field.key)) customFields.push(field);
-    }
-    await courses.updateOne({ slug: "focus-improvement" }, { $set: { customFields } });
-    console.log("focus-improvement: Purpose for improvement box present");
-  }
+  // Form fields are no longer set here; scripts/simplify-form.ts owns them.
 
   // Anything else still mentioning 2026 was written by hand in the dashboard,
   // so report it rather than silently rewriting someone's copy.

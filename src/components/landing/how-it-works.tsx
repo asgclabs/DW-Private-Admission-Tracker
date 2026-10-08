@@ -13,7 +13,7 @@ export function HowItWorks() {
               title="From application to admit card in seven steps"
               align="left"
             >
-              You spend about three minutes on the form. We handle the rest and keep you posted
+              You spend about a minute on the form. We handle the rest and keep you posted
               at every step.
             </SectionHeading>
             <div className="mt-8 flex flex-wrap gap-3">

@@ -50,7 +50,7 @@ export const PROCESS_STEPS = [
   {
     step: "02",
     title: "Fill the application",
-    body: "Share your personal details, CBSE roll number and the subjects you are appearing in. It takes about three minutes.",
+    body: "Share your name, your parents' names, your state and district, and how to reach you. It takes about a minute.",
   },
   {
     step: "03",

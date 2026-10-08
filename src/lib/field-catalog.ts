@@ -15,6 +15,7 @@ export type CatalogFieldKey =
   | "address"
   | "city"
   | "state"
+  | "district"
   | "pincode"
   | "rollNo"
   | "previousSchool"
@@ -67,6 +68,46 @@ export const GENDERS = [
   { value: "Female", label: "Female" },
   { value: "Other", label: "Other" },
 ] as const;
+
+/** The 28 states and 8 union territories, for the State dropdown. */
+export const INDIAN_STATES = [
+  "Andaman and Nicobar Islands",
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chandigarh",
+  "Chhattisgarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jammu and Kashmir",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Ladakh",
+  "Lakshadweep",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Puducherry",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+].map((state) => ({ value: state, label: state }));
 
 export const CBSE_SUBJECTS = [
   "English",
@@ -125,7 +166,20 @@ export const FIELD_CATALOG: Record<CatalogFieldKey, CatalogField> = {
     wide: true,
   },
   city: { key: "city", label: "City", group: "address", kind: "text" },
-  state: { key: "state", label: "State", group: "address", kind: "text" },
+  state: {
+    key: "state",
+    label: "State",
+    group: "address",
+    kind: "select",
+    options: INDIAN_STATES,
+  },
+  district: {
+    key: "district",
+    label: "District",
+    group: "address",
+    kind: "text",
+    placeholder: "e.g. Dehradun",
+  },
   pincode: {
     key: "pincode",
     label: "PIN code",
@@ -224,13 +278,13 @@ export const CATALOG_FIELD_KEYS = Object.keys(FIELD_CATALOG) as CatalogFieldKey[
 
 export const GROUP_LABELS: Record<CatalogField["group"], string> = {
   student: "Student details",
-  address: "Address",
+  address: "Location",
   cbse: "CBSE record",
 };
 
 export const GROUP_DESCRIPTIONS: Record<CatalogField["group"], string> = {
   student: "As printed on your CBSE documents.",
-  address: "Where we should send any physical material.",
+  address: "Where you live.",
   cbse: "Needed to fill the form exactly as CBSE expects.",
 };
 

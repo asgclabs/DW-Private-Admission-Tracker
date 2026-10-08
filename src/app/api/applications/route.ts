@@ -97,6 +97,7 @@ export async function POST(request: Request) {
     address: pick("address"),
     city: pick("city"),
     state: pick("state"),
+    district: pick("district"),
     pincode: pick("pincode"),
 
     rollNo: pick("rollNo"),
