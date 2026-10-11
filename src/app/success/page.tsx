@@ -12,6 +12,12 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+const COMMUNITY_LINKS = new Map<string, string>([
+  ["circle", "https://chat.whatsapp.com/JsdGIne5ePN4fLzQCy0xP6"],
+  ["focus-improvement", "https://chat.whatsapp.com/IwfF947lVnE1JDUpvd9SFw"],
+  ["focus-er", "https://chat.whatsapp.com/LjfUxnMN1Kr3ezEy5jjaS9"],
+]);
+
 export default async function SuccessPage({
   searchParams,
 }: {
@@ -28,6 +34,7 @@ export default async function SuccessPage({
         referenceNo: 1,
         fullName: 1,
         courseName: 1,
+        courseSlug: 1,
         amount: 1,
         paymentStatus: 1,
       },
@@ -35,6 +42,11 @@ export default async function SuccessPage({
   );
 
   if (!application) notFound();
+
+  const communityUrl =
+    application.paymentStatus === "PAID"
+      ? COMMUNITY_LINKS.get(application.courseSlug)
+      : undefined;
 
   return (
     <div className="container-page py-16 sm:py-24">
@@ -90,6 +102,24 @@ export default async function SuccessPage({
             </div>
           </dl>
         </div>
+
+        {communityUrl && (
+          <section className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+            <h2 className="text-lg font-bold text-slate-900">Join your course community</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              Join the WhatsApp community for {application.courseName}.
+            </p>
+            <a
+              href={communityUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn mt-5 w-full bg-emerald-700 text-white hover:bg-emerald-800 focus-visible:ring-emerald-500 sm:w-auto"
+            >
+              Join WhatsApp community
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </section>
+        )}
 
         <div className="mt-8 rounded-2xl bg-slate-50 p-6 text-left">
           <p className="text-sm font-bold text-slate-900">What happens next</p>
