@@ -150,6 +150,9 @@ export type ApplicationDoc = {
 
   amount: number;
   paymentStatus: PaymentStatus;
+  /** Older applications without this field were collected online through Razorpay. */
+  paymentSource?: "ONLINE" | "OFFLINE";
+  offlineReceipt?: string | null;
   /** Absent (not null) until the Razorpay order is created — see the sparse index. */
   razorpayOrderId?: string;
   razorpayPaymentId: string | null;

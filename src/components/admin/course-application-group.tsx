@@ -74,6 +74,7 @@ export function CourseApplicationGroup({
                 <span className={`badge ${PAYMENT_TONE[doc.paymentStatus] ?? ""}`}>
                   {doc.paymentStatus}
                 </span>
+                <span className="text-xs text-slate-500">{doc.paymentSource === "OFFLINE" ? "Offline" : "Online"}</span>
                 <span className="text-xs text-slate-400">{formatDate(doc.createdAt)}</span>
               </div>
             </Link>

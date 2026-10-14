@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 function formatDateTime(value: Date | null | undefined): string {
   if (!value) return "—";
   return value.toLocaleString("en-IN", {
+    timeZone: "Asia/Kolkata",
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -181,6 +182,8 @@ export default async function ApplicationDetail({
                 label="Amount"
                 value={`₹${application.amount.toLocaleString("en-IN")}`}
               />
+              <Row label="Payment source" value={application.paymentSource === "OFFLINE" ? "Offline" : "Online (Razorpay)"} />
+              {application.paymentSource === "OFFLINE" && <Row label="Receipt / transaction reference" value={application.offlineReceipt} />}
               <Row label="Razorpay order" value={application.razorpayOrderId} />
               <Row label="Razorpay payment" value={application.razorpayPaymentId} />
               <Row label="Paid at" value={formatDateTime(application.paidAt)} />

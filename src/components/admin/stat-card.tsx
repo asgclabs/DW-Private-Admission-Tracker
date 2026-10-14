@@ -38,7 +38,7 @@ export function StatCard({
         <Icon className="h-5 w-5" />
       </span>
       <div className="min-w-0">
-        <p className="truncate text-xs text-slate-500">{label}</p>
+        <p className="text-xs leading-relaxed text-slate-500">{label}</p>
         <p className="mt-1 text-2xl font-extrabold tracking-tight text-slate-900">{value}</p>
         {sub && <p className="mt-0.5 truncate text-[11px] text-slate-400">{sub}</p>}
       </div>

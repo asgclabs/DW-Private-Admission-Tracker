@@ -1,5 +1,6 @@
 import { applications } from "@/lib/mongodb";
 import { requireSuperAdmin } from "@/lib/auth";
+import { paymentMonthStarts, receivedPaymentsPipeline } from "@/lib/payment-query";
 import { StatCard } from "@/components/admin/stat-card";
 import { QuickCreateAdmin } from "@/components/admin/quick-create-admin";
 import { QuickNotification } from "@/components/admin/quick-notification";
@@ -41,8 +42,7 @@ export default async function AdminDashboardHome() {
 
   const col = await applications();
   const now = new Date();
-  const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  const startOfPrevMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const { thisMonth: startOfThisMonth, previousMonth: startOfPrevMonth } = paymentMonthStarts(now);
   const last28 = new Date(now.getTime() - 28 * 24 * 60 * 60 * 1000);
 
   const [facets] = await col
@@ -52,6 +52,7 @@ export default async function AdminDashboardHome() {
       thisMonth: FacetCount;
       prevMonth: FacetCount;
       pendingPayment: FacetCount;
+      paidApplications: FacetCount;
       underReview: FacetCount;
       documentsRequired: FacetCount;
       formSubmitted: FacetCount;
@@ -60,6 +61,8 @@ export default async function AdminDashboardHome() {
       cancelled: FacetCount;
       revenueThisMonth: FacetSum;
       revenueTotal: FacetSum;
+      revenueOffline: FacetSum;
+      revenueOnline: FacetSum;
     }>([
       {
         $facet: {
@@ -71,20 +74,17 @@ export default async function AdminDashboardHome() {
             { $count: "count" },
           ],
           pendingPayment: [{ $match: { paymentStatus: "PENDING" } }, { $count: "count" }],
+          paidApplications: [{ $match: { paymentStatus: "PAID" } }, { $count: "count" }],
           underReview: [{ $match: { status: "UNDER_REVIEW" } }, { $count: "count" }],
           documentsRequired: [{ $match: { status: "DOCUMENTS_REQUIRED" } }, { $count: "count" }],
           formSubmitted: [{ $match: { status: "FORM_SUBMITTED" } }, { $count: "count" }],
           admitCardIssued: [{ $match: { status: "ADMIT_CARD_ISSUED" } }, { $count: "count" }],
           completed: [{ $match: { status: "COMPLETED" } }, { $count: "count" }],
           cancelled: [{ $match: { status: "CANCELLED" } }, { $count: "count" }],
-          revenueThisMonth: [
-            { $match: { paymentStatus: "PAID", paidAt: { $gte: startOfThisMonth } } },
-            { $group: { _id: null, total: { $sum: "$amount" } } },
-          ],
-          revenueTotal: [
-            { $match: { paymentStatus: "PAID" } },
-            { $group: { _id: null, total: { $sum: "$amount" } } },
-          ],
+          revenueThisMonth: receivedPaymentsPipeline(undefined, startOfThisMonth),
+          revenueTotal: receivedPaymentsPipeline(),
+          revenueOffline: receivedPaymentsPipeline("OFFLINE"),
+          revenueOnline: receivedPaymentsPipeline("ONLINE"),
         },
       },
     ])
@@ -109,13 +109,28 @@ export default async function AdminDashboardHome() {
       </div>
 
       {/* Row 1: volume */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-3">
         <StatCard
           icon={DocumentIcon}
           tone="blue"
           label="Total Applications"
           value={totalApplications.toLocaleString("en-IN")}
         />
+        <StatCard
+          icon={CheckCircleIcon}
+          tone="emerald"
+          label="Paid Applications"
+          value={count(facets.paidApplications).toLocaleString("en-IN")}
+        />
+        <StatCard
+          icon={ClockIcon}
+          tone="amber"
+          label="Pending Payment"
+          value={count(facets.pendingPayment).toLocaleString("en-IN")}
+        />
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
         <StatCard
           icon={CalendarIcon}
           tone="purple"
@@ -129,13 +144,15 @@ export default async function AdminDashboardHome() {
           value={`${trendDelta > 0 ? "+" : ""}${trendDelta.toLocaleString("en-IN")}`}
           sub={`This month: ${thisMonthCount.toLocaleString("en-IN")} · Previous month: ${prevMonthCount.toLocaleString("en-IN")}`}
         />
-        <StatCard
-          icon={ClockIcon}
-          tone="amber"
-          label="Pending Payment"
-          value={count(facets.pendingPayment).toLocaleString("en-IN")}
-        />
       </div>
+
+      {isSuperAdmin && (
+        <div className="grid gap-4 sm:grid-cols-3">
+          <StatCard icon={RupeeIcon} tone="purple" label="Offline Payment Received" value={money(sum(facets.revenueOffline))} />
+          <StatCard icon={RupeeIcon} tone="blue" label="Online Payment Received" value={money(sum(facets.revenueOnline))} />
+          <StatCard icon={RupeeIcon} tone="green" label="Total Payment Received" value={money(revenueTotal)} sub="Confirmed online and offline payments" />
+        </div>
+      )}
 
       {/* Row 2: workflow stages */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -186,12 +203,6 @@ export default async function AdminDashboardHome() {
               tone="pink"
               label="Revenue This Month"
               value={money(revenueThisMonth)}
-            />
-            <StatCard
-              icon={RupeeIcon}
-              tone="green"
-              label="Total Collection"
-              value={money(revenueTotal)}
             />
           </>
         )}

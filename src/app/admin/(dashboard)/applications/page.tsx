@@ -9,6 +9,7 @@ import {
 import { PAYMENT_TONE, STATUS_LABELS, STATUS_TONE, statusLabel, type StatusKey } from "@/lib/status";
 import { AdminFilters } from "@/components/admin/admin-filters";
 import { CourseApplicationGroup } from "@/components/admin/course-application-group";
+import { OfflineApplicationForm } from "@/components/admin/offline-application-form";
 
 export const dynamic = "force-dynamic";
 
@@ -101,6 +102,8 @@ export default async function ApplicationsPage({
           </a>
         </div>
       </div>
+
+      <OfflineApplicationForm courses={courses.map((course) => ({ id: course.id, name: course.shortName, fee: course.fee, isActive: course.isActive }))} />
 
       <AdminFilters
         programs={courses.map((c) => ({ value: c.slug, label: c.shortName }))}
@@ -199,6 +202,7 @@ async function TableView({
                   <span className={`badge ${PAYMENT_TONE[application.paymentStatus] ?? ""}`}>
                     {application.paymentStatus}
                   </span>
+                  <p className="mt-1 text-xs text-slate-500">{application.paymentSource === "OFFLINE" ? "Offline" : "Online"}</p>
                 </td>
                 <td className="px-5 py-4 text-xs text-slate-500">
                   {formatDate(application.createdAt)}

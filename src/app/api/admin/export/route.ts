@@ -44,6 +44,8 @@ const COLUMNS = [
   "Razorpay Payment",
   "Paid At",
   "Applied At",
+  "Payment Source",
+  "Offline Receipt",
 ];
 
 /** Flattens the per-course custom answers into one readable cell. */
@@ -119,6 +121,8 @@ export async function GET(request: Request) {
       a.razorpayPaymentId,
       a.paidAt,
       a.createdAt,
+      a.paymentSource === "OFFLINE" ? "OFFLINE" : "ONLINE",
+      a.offlineReceipt,
     ]
       .map(escapeCell)
       .join(","),

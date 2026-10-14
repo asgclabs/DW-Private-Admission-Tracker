@@ -57,6 +57,7 @@ export type GroupedApplicationRow = {
   phone: string;
   status: ApplicationStatus;
   paymentStatus: PaymentStatus;
+  paymentSource?: "ONLINE" | "OFFLINE";
   createdAt: Date;
 };
 
@@ -95,6 +96,7 @@ export function buildGroupedApplicationsPipeline(
             phone: "$phone",
             status: "$status",
             paymentStatus: "$paymentStatus",
+            paymentSource: "$paymentSource",
             createdAt: "$createdAt",
           },
         },

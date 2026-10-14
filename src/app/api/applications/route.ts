@@ -117,6 +117,7 @@ export async function POST(request: Request) {
     // Taken from the course document, never from the browser.
     amount: course.fee,
     paymentStatus: "PENDING",
+    paymentSource: "ONLINE",
     razorpayPaymentId: null,
     razorpaySignature: null,
     paidAt: null,

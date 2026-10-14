@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "node --import tsx --test src/lib/offline-application.test.ts",
+    "test:payments": "tsx scripts/check-payment-totals.ts",
     "db:seed": "tsx scripts/seed.ts",
     "db:indexes": "tsx scripts/seed.ts",
     "mongo:init": "node scripts/init-replica-set.mjs",
